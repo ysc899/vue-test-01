@@ -3,6 +3,8 @@ Vue.component('todo-items',{
     template:'<li>{{todo.text}}</li>'
 });
 
+setTimeout(function(){
+
 
 var app = new Vue({ 
     el: '#app',
@@ -53,7 +55,7 @@ var app = new Vue({
         }
     }
 });
-
+},5000);
 
 app.message = "Changed Data! Hello Vue!!!"
 
