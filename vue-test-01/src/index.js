@@ -59,4 +59,4 @@ var app = new Vue({
 
 app.message = "Changed Data! Hello Vue!!!"
 
-app.todos.push({text:'New item'})
+//app.todos.push({text:'New item'})

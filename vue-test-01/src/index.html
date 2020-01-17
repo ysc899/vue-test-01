@@ -9,6 +9,8 @@
     <body>
         
         <div id="app" v-cloak>
+            The v-model Vue directive allows us to create a two-way binding.<br/> <br/>       
+           <input v-model="message" placeholder="Enter a message"> 
            <p v-cloak> {{ message }} </p>
            <p>Firstname : {{firstname}}</p>
            <p>Lastname : {{lastname}}</p>
@@ -27,16 +29,16 @@
                     v-bind:key="item.id">
                 </todo-items>
             </ol>
-        <!-- <div v-if="loading">Loading...</div> -->
-        <!-- <div
-        v-else
-        v-for="currency in info"
-        class="currency">
-            {{currency.description}} : 
-        </div> -->
-        <!-- <span class="lighten">
-            <span v-html="currency.symbol">{{currency.rate_float | currencydecimal}}</span>
-        </span> -->
+            <!-- <div v-if="loading">Loading...</div> -->
+            <!-- <div
+            v-else
+            v-for="currency in info"
+            class="currency">
+                {{currency.description}} : 
+            </div> -->
+            <!-- <span class="lighten">
+                <span v-html="currency.symbol">{{currency.rate_float | currencydecimal}}</span>
+            </span> -->
         <div v-for="currency in info">
         {{currency.description}}
            </div> 
