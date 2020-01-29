@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html> 
+<head>
+<link rel="stylesheet" href="../base.css">
+<link rel="stylesheet" href="../common.css">
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.1/axios.js"></script>
+</head>
+<body>	
+<!-- contents -->
+
+<div id="app">
+
+<div class="wrapper emphasis-type">
+	
+	<!-- header -->
+	<div class="header-wrap">
+		<div class="header sub">
+			<h1 class="sub-tit">1:1 문의 작성</h1>
+			<button type="button" class="icon-header-back">
+				뒤로가기
+			</button>
+		</div>
+	</div>
+	<!-- //header -->
+	
+	<!-- container -->
+	<section class="container">
+		<!-- contents -->
+		<article class="contents">
+			<div class="counsel-cont">
+				<!-- qna-write-block -->
+				<div class="qna-write-block">
+					<div class="box-gray-bg grid-type1">
+						<p class="block-desc-txt"><b>작은 소리도 귀 기울여 듣겠습니다</b></p>
+						<ul class="dot-gray-ul">
+							<li>상품에 대한 문의는 근무일 기준 24시간 이내 답변해 드리겠습니다. </li>
+							<li>주민번호, 전화번호, 이메일 등 개인정보는 타인에 의해 도용될 수 있어 남기지 말아주세요. </li>
+						</ul>
+					</div>
+					
+					<!-- qna-write-wrap -->
+					<div class="qna-write-wrap">
+						
+						<!-- qna-cate-select -->
+						<div class="qna-cate-select grid-type1">
+							<button type="button" class="btn-select-sty2 select btn-actionseet" data-actionsheet="qna-cate">
+								<span>상품문의</span>
+								<i class="icon-down-gray24"></i>
+							</button>
+						</div>
+						<!-- //qna-cate-select -->
+						<!-- list-select-content : 상품문의 -->
+						<div class="fixed-action-sheet qna-cate">
+							<div class="action-sheet-bx">
+								<div class="btm-action-sheet">
+									<button type="button" class="toggle-btn">컨텐츠 열기 닫기</button>
+								</div>
+								<div class="action-sheet-scr"><!-- action-sheet-scr 스크롤 영역 -->
+									<div class="select-sheet">
+										<ul class="select-lst">
+											<li>
+												<label for="rd1-1" class="chk-box rd">
+													<input type="radio" id="rd1-1" name="list-cate-rd" checked="">
+													<span class="form-txt">
+												<strong>전체</strong>
+											</span>
+												</label>
+											</li>
+											<li>
+												<label for="rd1-2" class="chk-box rd">
+													<input type="radio" id="rd1-2" name="list-cate-rd">
+													<span class="form-txt">
+												<strong>상품문의</strong>
+											</span>
+												</label>
+											</li>
+											<li>
+												<label for="rd1-3" class="chk-box rd">
+													<input type="radio" id="rd1-3" name="list-cate-rd">
+													<span class="form-txt">
+												<strong>재입고문의</strong>
+											</span>
+												</label>
+											</li>
+											<li>
+												<label for="rd1-4" class="chk-box rd">
+													<input type="radio" id="rd1-4" name="list-cate-rd">
+													<span class="form-txt">
+												<strong>배송문의</strong>
+											</span>
+												</label>
+											</li>
+											<li>
+												<label for="rd1-5" class="chk-box rd">
+													<input type="radio" id="rd1-5" name="list-cate-rd">
+													<span class="form-txt">
+												<strong>기타</strong>
+											</span>
+												</label>
+											</li>
+										</ul>
+									</div>
+								</div>
+							</div>
+							<div class="dim"></div>
+						</div>
+						<!-- //list-select-content : 상품문의 -->
+
+						<!-- 문의유형 default일 경우 -->
+						<div class="counsel-default">
+							<!-- txt-area -->
+							<div class="txt-area-wrap grid-type1">
+								<div class="write-srh-form">
+									<span class="input-type1">
+										<input id="" value="고슬고슬 집밥 백미 외 2개" type="text" class="input-form" placeholder="문의 상품을 찾아주세요">
+									</span>
+									<a href="#" class="btn-write-srh">검색하기</a>
+								</div>
+							</div>
+							<!-- //txt-area -->
+							<!-- txt-area -->
+							<div class="txt-area-wrap grid-type1">
+								<div class="txt-area">
+									<!-- Interaction Desc -->
+									<!-- : .txt-count 현재 텍스트 length 표시-->
+									<!-- //Interaction Desc -->
+									<textarea placeholder="내용을 입력해주세요" maxlength="1500" @keyup="keymonitor"></textarea>
+									<span class="txt-count"><em>0</em>/1,500</span><!-- 20200107 : 수정 -->
+								</div>
+							</div>
+							<!-- //txt-area -->
+							<!--qna-attachfiles-block-->
+							<div class="qna-attachfiles-block grid-type1">
+								<!-- //Interaction Desc -->
+								<div class="btn-attach-wrap">
+									<button type="button" class="btn-attch-img">
+									<!--
+									<button type="button" class="btn-attch-img attch-disable">
+									-->
+										<i class="icon-img"></i>
+										<span>사진 <span class="attch-current-num">0</span>/<span class="attch-total-num">10</span></span>
+										<input type="file" name="" id="" class="no-show" multiple="multiple" accept="image/*">
+										<!--
+										<input type="file" name="" id="" class="no-show" multiple="multiple" accept="image/*" disabled/>
+										-->
+									</button>
+									<button type="button" class="btn-attch-mov">
+									<!--
+									<button type="button" class="btn-attch-mov attch-disable">
+									-->
+										<i class="icon-mov"></i>
+										<span>동영상 <span class="attch-current-num">0</span>/<span class="attch-total-num">1</span></span>
+										<input type="file" name="" id="" class="no-show" accept="video/*">
+										<!--
+										<input type="file" name="" id="" class="no-show" accept="video/*"/ disabled>
+										-->
+									</button>
+								</div>
+								<!-- 
+									공통 수정사항
+									- 사진/동영상 첨부 파일 : 사진은 최대 10개 / 동영상은 최대 1개
+									- 사진은 10개까지 업로드 되고 최대 10개까지 업로드 될시 .btn-attch-img에 .attch-disable class 삽입 /
+									  .no-show class명의 input type=file을 disabled 시킴
+									- 영상은 1개까지 업로드 되고 최대 1개 업로드 되면 .btn-attch-img에 .attch-disable class 삽입 /
+									  .no-show class명의 input type=file을 disabled 시킴
+									- 업로드 갯수에 따라 .attch-current-num class명의 숫자 카운트됨
+								-->
+								<!-- //btn-attach-wrap -->
+								<!-- attach-preview-wrap -->
+								<!-- //Interaction Desc -->
+								<div class="attach-preview-wrap swiper-container swiper-container-initialized swiper-container-horizontal">
+									<ul class="swiper-wrapper">
+									</ul>
+								<span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span></div>
+								<!-- //attach-preview-wrap -->
+							</div>
+							<!--//qna-attachfiles-block-->
+						</div>
+						<!-- 문의유형 default일 경우 -->
+
+					</div>
+					<!-- //qna-write-wrap -->
+				</div>
+				<!-- //qna-write-block -->
+			</div>	
+			
+
+			<!-- btn-wrap -->
+			<div class="emphasis-btn-bx btn-static"><!-- 20200107 수정 class 추가 -->
+				<!-- 내용 입력 전 버튼 비활성화 상태 : disabled -->
+				<button type="button" class="btn-type3" disabled="disabled">
+					<span>1:1 문의 등록하기</span>
+				</button>
+			</div>
+			<!-- //btn-wrap -->
+			<form method="POST" enctype="multipart/form-data" id="fileUploadForm">
+			<input type="file" name="files">
+			</form>
+		</article>
+		<!-- //contents -->
+	</section>
+	<!-- //container -->
+
+</div>
+
+</div>
+
+
+<script type="text/javascript" >
+new Vue({
+	el: '#app',
+	data() {
+		return {
+			pageTitle: 'ttt'
+		}
+	},
+	created() {
+		console.log('created');
+	},
+	mounted() {
+		console.log('mounted');
+	},
+	updated() {
+		console.log('updated');
+	},
+	watch: {
+		
+	},
+	methods: {
+		keymonitor(e){
+			//console.log("keymonitor");
+			var clk = e.target.value.length;
+			console.log("clk == " + clk);
+			var dd = document.querySelector('.emphasis-btn-bx.btn-static > button');
+			if(clk > 0){
+				dd.disabled = false;
+			}else{
+				dd.disabled = true;
+			}
+			console.log("dd == " , dd.getAttribute('disabled'));
+		}
+	},
+	computed: {
+		
+	}
+	
+})
+
+
+</script>
+<script type="text/javascript">
+(function(){
+	console.log("java script called");
+})();
+
+document.addEventListener('DOMContentLoaded',function(event){
+	console.log("DOM fully loaded and parsed");
+	document.body.addEventListener('click',function(e){
+		if(e.target.matches("[class$='icon-header-close']")){
+			window.close();
+		}
+		
+	});
+});
+</script>
+<script type="text/javascript" src="../swiper.js"></script>
+<script type="text/javascript" src="../style.js"></script>
+<script type="text/javascript" src="../master.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,123 @@
+<html>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.1/axios.js"></script>
+<body>
+<div id="app">
+<p>You have decided this statement is </p>
+Is this statement true? {{statementIsTrue}}.
+<label>
+  <input type="radio" value="Yes" v-model="statementIsTrue"/>
+  Yes, it is true.
+</label>
+<label>
+  <input type="radio" value="No" v-model="statementIsTrue"/>
+  No, not at all.
+</label>
+<br/><br/>
+<input type="checkbox" id="jack" value="Jack" v-model="checkedNames">
+  <label for="jack">Jack</label>
+  <input type="checkbox" id="john" value="John" v-model="checkedNamesa">
+  <label for="john">John</label>
+  <input type="checkbox" id="mike" value="Mike" v-model="checkedNamesa">
+  <label for="mike">Mike</label>
+  <br>
+  <span>Checked names: {{ checkedNames }}</span>
+<br/><br/>  
+<template v-for="td in testData">
+<label>
+<input type="checkbox" v-model="selected" :value="td.name">{{td.name}}
+</label>
+</template>
+<br/>
+<h1>{{selected}}</h1>
+<br>
+  <div>
+    <label>this is ok (this.$data._text): </label>
+    <input v-model="working" />
+  </div>
+ <pre>{{ $data._text }}</pre>  
+</div>
+
+</body>
+<script type="text/javascript">
+var APP_LOG_LIFECYCLE_EVENTS = true;
+new Vue({
+	el: '#app',
+	data(){
+		return {
+			statementIsTrue: 'Yes',
+			testData:[
+			   	{id: 1, name: 'one'}
+				,{id: 2, name: 'two'}
+				,{id: 3, name: 'three'}
+			],
+			selected: [],
+			checkedNames: [],
+			 _text: ''
+		}
+	},
+	computed:{
+		checkedNamesa : {
+			get:function(){
+				console.log("get");
+			},
+			set:function(value){
+				console.log("set == " + value);
+				return this.value;
+			}
+		},
+	  	working: {
+	        get: function() {
+	        	console.log("get");
+	          return this.$data._text;
+	        },
+	        set: function(textr) {
+	        	console.log("set === " + textr);
+	        	this.$data._text = textr;
+	        }
+	      }		
+	},
+    beforeCreate: function () {
+      if (APP_LOG_LIFECYCLE_EVENTS) {
+        console.log("beforeCreate");
+      }
+    },
+    created: function () {
+      if (APP_LOG_LIFECYCLE_EVENTS) {
+        console.log("created");
+      }
+    },
+    beforeMount: function () {
+      if (APP_LOG_LIFECYCLE_EVENTS) {
+        console.log("beforeMount");
+      }
+    },
+    mounted: function () {
+      if (APP_LOG_LIFECYCLE_EVENTS) {
+        console.log("mounted");
+      }
+    },
+    beforeUpdate: function () {
+      if (APP_LOG_LIFECYCLE_EVENTS) {
+        console.log("beforeUpdate");
+      }
+    },
+    updated: function () {
+      if (APP_LOG_LIFECYCLE_EVENTS) {
+        console.log("updated");
+      }
+    },
+    beforeDestroy: function () {
+      if (APP_LOG_LIFECYCLE_EVENTS) {
+        console.log("beforeDestroy ");
+      }
+    },
+    destroyed: function () {
+      if (APP_LOG_LIFECYCLE_EVENTS) {
+        console.log("destroyed");
+      }
+    }
+ 
+});
+</script>
+</html>

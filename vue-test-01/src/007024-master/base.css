@@ -1,0 +1,232 @@
+@charset "utf-8";
+@import "swiper.min.css";
+@import "simple.css";
+@import "font.css";
+@import "layout.css";
+@import "common.css";
+@import "section.css";
+@import "detail-section02.css";
+/** 류승현 작업 **/
+/* --------------------------------------------
+ * default
+/* ------------------------------------------ */
+* {
+    -webkit-text-size-adjust: none;
+    letter-spacing: -0.8px;
+    word-break: break-all;
+    box-sizing: border-box;
+    outline: none;
+}
+
+html {
+    padding: 0px;
+    margin: 0;
+    /* overflow-y:scroll;*/ height:100%;
+}
+
+html, body {
+    height: 100%;
+    -webkit-text-size-adjust: none;
+    -webkit-appearance: none;
+}
+
+body {
+    font-family: 'NotoSans', 'Roboto', sans-serif;
+    font-size: 12px;
+    color: #666;
+    font-weight: normal;
+}
+
+html, body, div, span, object, iframe, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video, h1, h2, h3, h4, h5, h6, header, footer, section, article, aside, nav, hgroup, details, figure, figcaption {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-weight: bold;
+}
+
+/* html5 block ///// header,footer,section,article,aside,nav,hgroup,details,figure,figcaption {display:block;}*/
+button, a {
+    touch-action: manipulation;
+}
+
+/* --------------------------------------------
+ * link
+/* ------------------------------------------ */
+a {
+    text-decoration: none;
+    color: #666;
+}
+
+/* --------------------------------------------
+ * etc
+/* ------------------------------------------ */
+address, em, dfn {
+    font-style: normal;
+}
+
+strong {
+    font-weight: bold;
+}
+
+hr {
+    display: none;
+}
+
+img {
+    border: 0;
+    vertical-align: middle;
+}
+
+mark {
+    background: none;
+}
+
+/* --------------------------------------------
+ * table
+/* ------------------------------------------ */
+table {
+    width: 100%;
+    border-spacing: 0;
+    table-layout: fixed;
+    border-collapse: collapse;
+    empty-cells: show;
+}
+
+/*border-collapse:separate;*/
+tbody, tfoot, thead, tr, th, td {
+    word-break: break-all;
+}
+
+caption {
+    visibility: hidden;
+    width: 0;
+    height: 0;
+    font-size: 0;
+    line-height: 0;
+    position: static;
+    left: 0;
+    top: -999999px;
+}
+
+/* --------------------------------------------
+ * fieldset
+/* ------------------------------------------ */
+fieldset {
+    border: none;
+}
+
+legend {
+    visibility: hidden;
+    width: 0;
+    height: 0;
+    font-size: 0;
+    line-height: 0;
+    position: absolute;
+    left: 0;
+    top: -999999px;
+}
+
+/* --------------------------------------------
+ * form
+/* ------------------------------------------ */
+button, input[type=button], input[type=submit], input[type=reset] {
+    cursor: pointer;
+    width: auto;
+    overflow: visible;
+    vertical-align: middle;
+    background: none;
+    margin: 0;
+    padding: 0;
+    font-family: 'NotoSans', 'Roboto', sans-serif;
+    font-weight: normal;
+}
+
+input[type="text"], input[type="password"], input[type="email"], input[type="number"], input[type="date"], input[type="search"], input[type="datetime"] {
+    border: 1px solid #d3d4d6;
+    padding: 3px 5px;
+    height: 37px;
+    width: 100%;
+    font-size: 14px;
+    border-radius: 0;
+    background: #fff;
+    -webkit-appearance: none;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    font-family: 'NotoSans', sans-serif;
+    font-weight: normal;
+    caret-color: #0fd6f7;
+}
+
+input[type="radio"], input[type="checkbox"] {
+    font-family: 'NotoSans', 'Roboto', sans-serif;
+    font-weight: normal;
+}
+
+button::-moz-focus-inner {
+    padding: 0;
+    border: 0;
+    cursor: pointer;
+    font-family: 'NotoSans', 'Roboto', sans-serif;
+    font-weight: normal;
+}
+
+select {
+    border-radius: 0;
+    padding: 0;
+    margin: 0;
+    border: none;
+    -webkit-appearance: none;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    -webkit-appearance: listbox;
+    background-color: transparent;
+}
+
+textarea {
+    resize: none;
+    width: 100%;
+    padding: 15px;
+    border: 1px solid #d3d4d6;
+    display: block;
+    font-family: 'NotoSans', 'Roboto', sans-serif;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    font-weight: normal;
+}
+
+input, button, select {
+    vertical-align: middle;
+    border: 0;
+    font-family: 'NotoSans', 'Roboto', sans-serif;
+    font-weight: normal;
+}
+
+label {
+    cursor: pointer;
+    font-family: 'NotoSans', 'Roboto', sans-serif;
+    font-weight: normal;
+}
+
+/* --------------------------------------------
+ * skip
+/* ------------------------------------------ */
+.skip {
+    overflow: hidden;
+    visibility: hidden;
+    position: absolute;
+    width: 0;
+    height: 0;
+    font-size: 0;
+    line-height: 0;
+}
+
+

@@ -1,0 +1,212 @@
+<html lang="ko"><head>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.1/axios.js"></script>
+</head>
+<body>
+
+<div id="app">
+<br>
+array : <br>
+{{array}}
+<br><br>
+uniqueSet : <br>
+{{uniqueSet}}
+<br><br>
+compute01 : <b>Set</b><br>
+{{compute01}}{{backToArray}}
+<br><br>
+compute02 : <b>Array.from</b><br>
+{{compute02}}{{arrayfrom}}
+<br><br>
+compute03 : <b>Filter</b><br>
+{{compute03}}{{arrayfilter}}
+<br><br>
+compute04 : <b>Filter</b><br>
+{{compute04}}{{arrayfilterdu}}
+<br><br>
+compute05 : <b>Reduce</b><br>
+{{compute05}}{{arrayreduce}}
+<br>
+<pre>
+	computed:{
+		compute01(){
+			console.log("com01");
+			this.uniqueSet = new Set(this.array);
+			this.backToArray = [...this.uniqueSet]
+		},
+		compute02(){
+			console.log("com02");
+			this.arrayfrom = Array.from(new Set(this.array));
+		},
+		compute03(){
+			console.log("com03");
+			this.arrayfilter = this.array.filter((item, index) => {
+				console.log(
+					//a. item
+					item,
+					//b. index
+					index,
+					//c. indexOf
+					this.array.indexOf(item),
+					//d, condition
+					this.array.indexOf(item) === index
+				);
+				return this.array.indexOf(item) === index;
+			});
+		},
+		compute04(){
+			console.log("com04");
+			this.arrayfilterdu = this.array.filter((item, index) => {
+			return this.array.indexOf(item) !== index
+			});
+		},
+		compute05(){
+			console.log("com05");
+			this.arrayreduce = this.array.reduce((unique, item) => {
+				console.log(
+					//a. Item
+					item,
+					//b. Final Array (Accumulator)
+					unique,
+					//c. Condition (Remember it only get pushed if this returns false)
+					unique.includes(item),
+					//d, Reducer Function Result
+					unique.includes(item) ? unique : [...unique, item]
+				);
+				return unique.includes(item) ? unique : [...unique, item];
+			});
+		}
+	}
+</pre>
+</div>
+<script type="text/javascript">
+(function(){
+	console.log("java script called");
+})();
+
+document.addEventListener('DOMContentLoaded',function(event){
+	console.log("DOM fully loaded and parsed");
+	document.body.addEventListener('click',function(e){
+		
+	});
+});
+</script>
+<script>
+var APP_LOG_LIFECYCLE_EVENTS = true;
+new Vue({
+	el: '#app',
+	data(){
+		return {
+			statementIsTrue: 'Yes',
+			testData:[
+			   	{id: 1, name: 'one'}
+				,{id: 2, name: 'two'}
+				,{id: 3, name: 'three'}
+			],
+			selected: [],
+			checkedNames: [],
+			 _text: '',
+			array: ['a', 'b', 'c', 'd', 'b', 'c', 'e', 'a'],
+			uniqueSet: [],
+			backToArray: [],
+			arrayfrom: [],
+			arrayfilter: [],
+			arrayfilterdu: [],
+			arrayreduce: []
+		}
+	},
+	computed:{
+		compute01(){
+			console.log("com01");
+			this.uniqueSet = new Set(this.array);
+			this.backToArray = [...this.uniqueSet]
+		},
+		compute02(){
+			console.log("com02");
+			this.arrayfrom = Array.from(new Set(this.array));
+		},
+		compute03(){
+			console.log("com03");
+			this.arrayfilter = this.array.filter((item, index) => {
+				console.log(
+					//a. item
+					item,
+					//b. index
+					index,
+					//c. indexOf
+					this.array.indexOf(item),
+					//d, condition
+					this.array.indexOf(item) === index
+				);
+				return this.array.indexOf(item) === index;
+			});
+		},
+		compute04(){
+			console.log("com04");
+			this.arrayfilterdu = this.array.filter((item, index) => {
+			return this.array.indexOf(item) !== index
+			});
+		},
+		compute05(){
+			console.log("com05");
+			this.arrayreduce = this.array.reduce((unique, item) => {
+				console.log(
+					//a. Item
+					item,
+					//b. Final Array (Accumulator)
+					unique,
+					//c. Condition (Remember it only get pushed if this returns false)
+					unique.includes(item),
+					//d, Reducer Function Result
+					unique.includes(item) ? unique : [...unique, item]
+				);
+				return unique.includes(item) ? unique : [...unique, item];
+			});
+		}
+	},
+    beforeCreate: function () {
+      if (APP_LOG_LIFECYCLE_EVENTS) {
+        console.log("beforeCreate");
+      }
+    },
+    created: function () {
+      if (APP_LOG_LIFECYCLE_EVENTS) {
+        console.log("created");
+      }
+    },
+    beforeMount: function () {
+      if (APP_LOG_LIFECYCLE_EVENTS) {
+        console.log("beforeMount");
+      }
+    },
+    mounted: function () {
+      if (APP_LOG_LIFECYCLE_EVENTS) {
+        console.log("mounted");
+      }
+    },
+    beforeUpdate: function () {
+      if (APP_LOG_LIFECYCLE_EVENTS) {
+        console.log("beforeUpdate");
+      }
+    },
+    updated: function () {
+      if (APP_LOG_LIFECYCLE_EVENTS) {
+        console.log("updated");
+      }
+    },
+    beforeDestroy: function () {
+      if (APP_LOG_LIFECYCLE_EVENTS) {
+        console.log("beforeDestroy ");
+      }
+    },
+    destroyed: function () {
+      if (APP_LOG_LIFECYCLE_EVENTS) {
+        console.log("destroyed");
+      }
+    }
+ 
+});
+</script>
+<!-- //wrapper -->
+</body>
+</html>
