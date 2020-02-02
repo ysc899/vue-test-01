@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html> 
+<head>
+<link rel="stylesheet" href="../base.css">
+<link rel="stylesheet" href="../common.css">
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.1/axios.js"></script>
+</head>
+<body>	
+<!-- contents -->
+
+<div id="app">
+   	<div v-for="(td, index) in testData" :key="td.id">
+ 	{{index}} - {{td.id}} - {{td.name}} - {{td.date}}
+ 	</div>
+ 	<br>
+ 	<div v-for="(td, index) in uniqueDate" :key="td.date">
+ 	{{td}}
+ 	</div> 
+ 	<br>
+ 
+  <br/><br/><br/>
+selected: {{selected}}
+  <br/>
+<div class="prd-find-info">
+<template v-for="(ord, index) in ordList">
+<div class="commodity-search-block">
+<div class="block-search-area">
+<span class="commn-check-block">
+<!-- 체크박스 -->
+<label for="commn-check" class="chk-box">
+<input type="checkbox" class="checkbox" :id="'commn-check'+ord.ord.date+'-'+ ord.ord.ordNo" :name="'uitem-'+ord.ord.date+'-'+ ord.ord.ordNo" 
+	v-model="selectAll" :value="ord.ord.date+'-'+ord.ord.ordNo">
+<span class="form-txt"><em class="date">{{ord.ord.date}}</em> 주문({{ord.ord.ordNo}})</span>
+</label>    
+</span>
+</div>
+
+
+<div class="comm-block-list">
+<ul class="view-list-type4">
+<li v-for="(god, index) in ord.ordGod" >
+<!-- 20200120 수정 - 상품찾기 목록 마크업 수정 -->
+<label for="comm-prkcheck" class="chk-box ord-god">
+<input type="checkbox"  :name="'item-'+god.date+'-'+god.ordNo"  v-model="selected"  :value="god.ordNo +'-'+ god.turn"  @change="chkDate()">
+<div class="prdt-item">
+<div class="label-area">
+</div>
+<div class="prdt-thumb">
+<img class="thumb-type1" src=""/>
+</div>
+<div class="prdt-info">
+<dl>
+<dd class="prdt-name">
+{{god.name}} 
+</dd>
+<dd class="prdt-price">
+{{god.price}}
+</dd>
+<em class="num-type1">
+</em>
+</dl>
+</div>
+</div>
+</label> 
+</li>
+</ul>
+</div> 
+
+
+
+</div>
+</template>
+</div> 
+ 
+ 
+<br>
+<br>
+<br> 
+<select v-model="selectedDay" style="width:10%;">
+    <option v-for="day in days" :selected="selectedDay === day">{{ day }}</option>
+</select>
+<br/>  
+<input type="number" v-model="counter"></input>
+<br/><br/>
+
+
+
+
+<nav class="tab-bar fixed-tab-bar">
+        <button type="button" class="btn-type1">
+            <span>상품 선택 완료</span>
+        </button>
+</nav>
+</div>
+
+<script type="text/javascript">
+(function(){
+	console.log("java script called");
+	var names = ["001-1","001-2","003-1","003-2"];
+	var namesArr = [];
+	names.forEach(function(x){
+		console.log(x);
+		namesArr = x.split('-');
+		console.log(namesArr);
+	});
+})();
+
+document.addEventListener('DOMContentLoaded',function(event){
+	console.log("DOM fully loaded and parsed");
+	document.body.addEventListener('click',function(e){
+		if(e.target.matches("[class$='icon-header-close']")){
+			window.close();
+		}
+		
+	});
+});
+</script>
+<script type="text/javascript" >
+
+
+new Vue({
+	el: '#app',
+data () {
+
+return {
+pageTitle:'상품찾기',
+ordGodList:null,
+isCheckAll: false,
+spriteArray: ["001-1","001-2"],
+ordList:[
+ {
+	 ord: { ordNo: "001", date: "2020.01.22"}
+	 ,ordGod: [
+		 		{ordNo: "001", turn:1, name: "one", date: "2020.01.22", price: 88000, img: "../../images/rose-165819_960_720.jpg" }
+			   ,{ordNo: "001", turn:2, name: "two", date: "2020.01.22", price: 28000, img: "../../images/rose-165819_960_720.jpg" }
+	 ]
+ }
+,{
+	 ord: { ordNo: "002", date: "2020.01.26"}
+	 ,ordGod: [
+		 		{ordNo: "002", turn:1, name: "three", date: "2020.01.26", price: 88000, img: "../../images/rose-165819_960_720.jpg" }
+			   ,{ordNo: "002", turn:2, name: "four", date: "2020.01.26", price: 34000, img: "../../images/rose-165819_960_720.jpg" }
+			   ,{ordNo: "002", turn:3, name: "five", date: "2020.01.26", price: 66000, img: "../../images/rose-165819_960_720.jpg" }
+	 ]
+ }
+,{
+	 ord: { ordNo: "003", date: "2020.01.28"}
+	 ,ordGod: [
+		 		{ordNo: "003", turn:1, name: "six", date: "2020.01.28", price: 8000, img: "../../images/rose-165819_960_720.jpg" }
+			   ,{ordNo: "003", turn:2, name: "seven", date: "2020.01.28", price: 55000, img: "../../images/rose-165819_960_720.jpg" }
+			   ,{ordNo: "003", turn:3, name: "eight", date: "2020.01.28", price: 20000, img: "../../images/rose-165819_960_720.jpg" }
+			   ,{ordNo: "003", turn:4, name: "nine", date: "2020.01.28", price: 90000, img: "../../images/rose-165819_960_720.jpg" }
+	 ]
+ }
+,{
+	 ord: { ordNo: "004", date: "2020.01.30"}
+	 ,ordGod: [
+		 		{ordNo: "004", turn:1, name: "ten", date: "2020.01.30", price: 50000, img: "../../images/rose-165819_960_720.jpg" }
+	 ]
+ }
+,{
+	 ord: { ordNo: "005", date: "2020.01.30"}
+	 ,ordGod: [
+		 		{ordNo: "005", turn:1, name: "eleven", date: "2020.01.30", price: 650000, img: "../../images/rose-165819_960_720.jpg" }
+		 	   ,{ordNo: "005", turn:2, name: "twelve", date: "2020.01.30", price: 620000, img: "../../images/rose-165819_960_720.jpg" }
+	 ]
+} 
+],
+testData:[
+	{id: 2, name: "two", date: "2020.01.22", price: 12000, img: "../../images/rose-165819_960_720.jpg"}
+	,{id: 3, name: "three", date: "2020.01.22", price: 34000, img: "../../images/rose-165819_960_720.jpg"}
+	,{id: 4, name: "four", date: "2020.01.23", price: 1500, img: "../../images/rose-165819_960_720.jpg"}
+	,{id: 5, name: "five", date: "2020.01.23", price: 87000, img: "../../images/rose-165819_960_720.jpg"}
+	,{id: 6, name: "six", date: "2020.01.23", price: 30000, img: "../../images/rose-165819_960_720.jpg"}
+	,{id: 7, name: "seven", date: "2020.01.23", price: 1200, img: "../../images/rose-165819_960_720.jpg"}
+	,{id: 8, name: "eight", date: "2020.01.24", price: 92000, img: "../../images/rose-165819_960_720.jpg"}
+	
+],
+selectedDate:null,
+selectedIndex: [],
+checkedNames: [],
+selected: [],
+selectAlls: [],
+chkDt:'',
+counter:0,
+form: {
+    parent_id: []
+  },
+  person: {
+      age: 19,
+      country: "Brazil"
+  },
+  selectedDay: '1',
+  // [1, 2, 3, ..., 31]
+  days: Array.from({ length: 31 }, (v, i) => i).slice(1)  
+
+//faqSn:{{faqList.faqSn}} 
+}
+},
+created(){
+console.log("created");
+//AccordionPanel('.slide-list-wrap');
+},
+   	   mounted() {
+    let selectedDay = new Date();
+    this.selectedDay = selectedDay.getDate(); // Sets selectedDay to the today's number of the month
+	
+//this.loadedCategory();	   
+console.log("Mounted");
+
+
+//this.getList();
+//document.querySelector('.tab-bar.fixed-tab-bar').remove();
+        },
+       	updated() {
+        
+       	//new ActionSheet('.fixed-action-sheet.qna-cate').show();
+        },   
+watch: {
+	counter(){
+		console.log("the counter has changed")
+	},
+	selectAlls(){
+		console.log("showAll in watch == " + this.selectAll[0])	
+         var selected = [];
+		 //var selectAll = [];
+         //if (value) {
+         //var chkDdt =	this.chkDt ;
+         var qsa = document.querySelectorAll('.checkbox:checked');
+         console.log("qsa == " + qsa.length);
+         console.log("qsa id == " + qsa[0].value);
+		console.log(document.querySelectorAll('.checkbox:checked'));
+				///console.log("aaa == ", sall );
+		 qsa.forEach(function (qq){
+			 console.log("qq == " + qq.value);
+		 });
+				
+ 			//qsa.forEach(function (qsa){
+				//this.selectAll = selectAll;
+				for ( var i=0; i < qsa.length; i++){
+	            this.testData.forEach(function (ttd) {
+	                //console.log("td.id === " + ttd.date);
+	                //console.log("this.chkDt === " + chkDdt);
+	                if(qsa[i].value == ttd.date){
+	                    selected.push(ttd.id);
+	                }
+	            });
+				}
+        	// });
+	            this.selected = selected;
+        
+        // }
+		
+	},
+	//console.log("call watch");
+selectedIndex: function() {
+                // 전체 체크박스 설정
+                console.log("this.selectedIndex.length === " + this.selected.length);
+                if (this.selected.length == this.testData.length) {
+                	console.log('true');
+                } else {
+                	console.log('fase');
+                }
+
+}
+},        
+methods:{
+getList(e){
+        axios
+       	.post('/mypage/helpdesk/selectOrdGodListPop.json')
+        .then(response => {
+        //this.inqList = response.data.lists;
+
+        this.ordGodList = response.data.ordGodList;
+        }); 
+},
+
+// 전체 선택/해제
+checkAll: function() {
+           this.selectedIndex = [];
+
+           if (this.isCheckAll) {
+this.setSelectedIndex();
+           }
+},	
+// 선택 체크박스  초기화
+setSelectedIndex: function() {
+            let idx = 0;
+            this.selectedIndex = [];
+                for (cart in this.cartList) {
+                    this.selectedIndex.push(idx);
+                    idx += 1;
+                }
+},	
+chkLength(){
+	console.log("checkLength in method");	
+},
+onChange(){
+//return this.checkedNames
+console.log("onChange clicked");
+},
+chkDate(){
+//return this.checkedNames
+//console.log("chkData in method " + e + " /// "+ event.target.getAttribute('value') + " //// " + event.target.value);
+//console.log("click event in method " + document.querySelector('.checkbox').checked);
+//return   event.target.value;
+console.log("aa" +event.target.name);
+this.chkDt = event.target.name;
+
+},	
+callFunction: function (event) {
+//console.log("class " + event.target.getAttribute('class'));
+       var id = event.target.getAttribute('id');
+
+}
+},
+        computed:{
+
+        //중복된 날짜 제거
+        uniqueDate() {
+        console.log("uniqueQuestions");
+             return this.testData.reduce((seed, current) => {
+               return Object.assign(seed, {
+                 [current.date]: current
+               });
+             }, {});
+           },
+           kind() { 
+				if (this.person.age > 18) { 
+					return 'Adult'; 
+					} else { 
+						return 'Minor'; 
+						} 
+					},
+
+               
+       	   checkedComputed () {
+           	console.log("checkedComputed");
+       	       return this.checkedNames
+       	     },
+            selectAll: {
+                get: function () {
+                	console.log("chkDt == " +this.chkDt);
+
+                var nc = document.querySelectorAll("input[name='"+this.chkDt+"']:not(:checked)").length;
+                console.log("nc == " , nc);
+                var unc = document.querySelector("input[name='u"+this.chkDt+"']");
+                console.log("unc = " , unc);
+                if (unc !=null){
+	                if (nc == 0){
+	                	console.log("aaa");
+	                	unc.checked = true;
+	                	//return true;
+	                }else{
+	                	console.log("bbb");
+	                	unc.checked = false;
+	                	//return false;
+	                }
+                }
+                    return this.selected.length > this.ordList.length ? false : false;
+                },
+                set: function (value) {
+                console.log("set1  selectAll set  == " + event.target.value + " // " + value);
+                this.chkDt = null;
+                var tt = event.target.value
+                var qsa = document.querySelectorAll("input[name='item-"+tt+"']");
+                var qsan = document.querySelectorAll(".chk-box.ord-god > input:not([name='item-"+tt+"'])");
+                    var selected = this.selected;
+                    var selected2 = [];
+                    if (value) {
+                    	qsa.forEach(function(x){
+                    		//console.log(x.value);
+                    		var index = selected.indexOf(x.value);
+                    		console.log("index == " + index);
+                    		if(index == -1){
+                    			selected.push(x.value);
+                    		}
+                    	});
+                        this.selected = selected;
+                    }else{
+                    	
+                    	qsan.forEach(function(x){
+                    		//console.log(x.value);
+                    		var index = selected.indexOf(x.value);
+                    		if(index > -1){
+                    			selected2.push(x.value);
+                    		}
+                    	});
+
+                    	this.selected = selected2;
+                    }
+
+                    //this.selected = selected.filter(name => name !== selected);
+                    
+                },
+                
+            }            
+        }
+})    	
+
+
+</script>
+<script type="text/javascript">
+(function(){
+	console.log("java script called");
+})();
+
+document.addEventListener('DOMContentLoaded',function(event){
+	console.log("DOM fully loaded and parsed");
+	document.body.addEventListener('click',function(e){
+		if(e.target.matches("[class$='icon-header-close']")){
+			window.close();
+		}
+	});
+});
+</script>
+<script src="../master.js"></script>
+<script src="../style.js"></script>
+<script src="../swiper.js"></script>
+
+
+
+</body>
+</html>
