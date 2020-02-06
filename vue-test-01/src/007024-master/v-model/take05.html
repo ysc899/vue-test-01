@@ -29,8 +29,8 @@ selected: {{selected}}
 <span class="commn-check-block">
 <!-- 체크박스 -->
 <label for="commn-check" class="chk-box">
-<input type="checkbox" class="checkbox" :id="'commn-check'+ord.ord.date+'-'+ ord.ord.ordNo" :name="'uitem-'+ord.ord.date+'-'+ ord.ord.ordNo" 
-	v-model="selectAll" :value="ord.ord.date+'-'+ord.ord.ordNo">
+<input type="checkbox" class="checkbox" :id="'commn-check-'+ ord.ord.ordNo" :name="'uitem-'+ ord.ord.ordNo" 
+	v-model="selectAll" :value="ord.ord.ordNo">
 <span class="form-txt"><em class="date">{{ord.ord.date}}</em> 주문({{ord.ord.ordNo}})</span>
 </label>    
 </span>
@@ -42,7 +42,7 @@ selected: {{selected}}
 <li v-for="(god, index) in ord.ordGod" >
 <!-- 20200120 수정 - 상품찾기 목록 마크업 수정 -->
 <label for="comm-prkcheck" class="chk-box ord-god">
-<input type="checkbox"  :name="'item-'+god.date+'-'+god.ordNo"  v-model="selected"  :value="god.ordNo +'-'+ god.turn"  @change="chkDate()">
+<input type="checkbox"  :name="'item-'+god.ordNo"  v-model="selected"  :value="god.ordNo +'-'+ god.turn"  @change="chkDate()">
 <div class="prdt-item">
 <div class="label-area">
 </div>
@@ -88,7 +88,7 @@ selected: {{selected}}
 
 
 <nav class="tab-bar fixed-tab-bar">
-        <button type="button" class="btn-type1">
+        <button type="button" class="btn-type1" onClick="pSave()">
             <span>상품 선택 완료</span>
         </button>
 </nav>
@@ -96,6 +96,7 @@ selected: {{selected}}
 
 <script type="text/javascript">
 (function(){
+	
 	console.log("java script called");
 	var names = ["001-1","001-2","003-1","003-2"];
 	var namesArr = [];
@@ -105,6 +106,12 @@ selected: {{selected}}
 		console.log(namesArr);
 	});
 })();
+
+function pSave(){
+	opener.pTest();
+	window.close();
+	//window.opener.pTest();
+}
 
 document.addEventListener('DOMContentLoaded',function(event){
 	console.log("DOM fully loaded and parsed");
@@ -266,6 +273,10 @@ selectedIndex: function() {
 }
 },        
 methods:{
+pSave(){
+	console.log("pSave");
+	//window.opener.pTest();
+	},	
 getList(e){
         axios
        	.post('/mypage/helpdesk/selectOrdGodListPop.json')

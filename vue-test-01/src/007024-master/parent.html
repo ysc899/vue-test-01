@@ -1,0 +1,15 @@
+<html> 
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script language="Javascript" type="text/javascript">
+        function CallParent()
+        {
+            alert(" Parent window Alert");
+        }
+        function parentWindow(){
+        	console.log("aaaaa");
+        }
+    </script>
+    <body> 
+        <a href="javascript:void(0);" NAME="My Window Name" title=" My title here " onClick=window.open("child.html","Ratting","width=550,height=170,0,status=0,");>Click here to open the child window</a>
+    </body> 
+</html>
